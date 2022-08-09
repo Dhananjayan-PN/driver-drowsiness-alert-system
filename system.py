@@ -8,9 +8,9 @@ from keras.models import load_model
 mixer.init()
 sound = mixer.Sound('alarm.wav')
 
-face = cv2.CascadeClassifier(os.path.join('haar cascade files','haarcascade_frontalface_alt.xml'))
-leye = cv2.CascadeClassifier(os.path.join('haar cascade files','haarcascade_lefteye_2splits.xml'))
-reye = cv2.CascadeClassifier(os.path.join('haar cascade files','haarcascade_righteye_2splits.xml'))
+face = cv2.CascadeClassifier(os.path.join('cascade_files', 'frontalface_alt.xml'))
+leye = cv2.CascadeClassifier(os.path.join('cascade_files', 'lefteye_2splits.xml'))
+reye = cv2.CascadeClassifier(os.path.join('cascade_files', 'righteye_2splits.xml'))
 
 model = load_model(os.path.join('models','cnnModel.h5'))
 path = os.getcwd()
