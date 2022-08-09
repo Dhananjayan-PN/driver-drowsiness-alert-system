@@ -49,9 +49,9 @@ VS = len(valid_batch.classes) // BS
 
 model = Sequential([
     Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(24, 24, 1)), # 32 convolution filters used each of size 3x3
-    MaxPooling2D(pool_size=(1, 1)),
+    MaxPooling2D(pool_size=(1, 1)), # choose the best features via pooling
     Conv2D(32, (3, 3), activation='relu'), # 32 convolution filters used each of size 3x3
-    MaxPooling2D(pool_size=(1, 1)),
+    MaxPooling2D(pool_size=(1, 1)), # choose the best features via pooling
     Conv2D(64, (3, 3), activation='relu'), # 64 convolution filters used each of size 3x3
     MaxPooling2D(pool_size=(1, 1)), # choose the best features via pooling
     Dropout(0.25),  # randomly turn neurons on and off to improve convergence
