@@ -1,16 +1,11 @@
 import os
 import shutil
 from glob import glob
+import matplotlib.pyplot as plt
 from keras.models import Sequential
 from sklearn.model_selection import train_test_split
 from keras.preprocessing.image import ImageDataGenerator
 from keras.layers import Dropout, Conv2D, Flatten, Dense, MaxPooling2D
-
-# import matplotlib.pyplot as plt
-# import numpy as np
-# from keras.utils.np_utils import to_categorical
-# import random
-# from keras.models import load_model
 
 DATA_DIR = 'data'
 TRAIN_DIR = os.path.join('data', 'train')
@@ -37,7 +32,6 @@ for file in open_val:
 os.makedirs(os.path.join(VAL_DIR, 'closed'))
 for file in closed_val:
   os.rename(file, file.replace('train', 'val'))
-
 
 BS = 32
 TS = (24, 24)
@@ -66,6 +60,22 @@ history = model.fit(train_batch, epochs=15, steps_per_epoch=SPE, validation_data
 
 print("Accuracy:", history.history['accuracy'][-1])
 print("Validation Accuracy:", history.history['val_accuracy'][-1])
+
+acc = history.history['accuracy']
+loss = history.history['loss']
+val_acc = history.history['val_accuracy']
+val_loss = history.history['val_loss']
+epochs = range(1,len(acc)+1)
+
+plt.plot(epochs, val_acc, 'r')
+plt.plot(epochs, acc, 'r.')
+plt.title("Training Accuracy")
+
+plt.figure()
+plt.plot(epochs, val_loss, 'r')
+plt.plot(epochs, loss, 'r.')
+plt.title("Training Loss")
+plt.show()
 
 model.save('models/cnnModel.h5', overwrite=True)
 
